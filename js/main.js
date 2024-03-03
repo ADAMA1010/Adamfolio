@@ -131,9 +131,12 @@ onePageClick();
 	scrollWindow();
 	// ...
 
-var carousel = function() {
+// ...
+
+$(document).ready(function () {
   var owl = $('.home-slider');
 
+  // Initialisez le carrousel
   owl.owlCarousel({
     loop: true,
     autoplay: true,
@@ -152,17 +155,26 @@ var carousel = function() {
     }
   });
 
+  // Ajoutez la gestion du défilement de la souris vers le bas
   owl.on('mousewheel', '.owl-stage', function (e) {
     if (e.deltaY > 0) {
-      owl.trigger('next.owl');
-    } else {
-      owl.trigger('prev.owl');
+      $('html, body').animate({
+        scrollTop: $(this).closest('.home-slider').next().offset().top
+      }, 500);
     }
     e.preventDefault();
   });
-};
 
-carousel();
+  // Désactivez le défilement automatique lors du défilement manuel
+  owl.on('drag.owl.carousel', function () {
+    owl.trigger('stop.owl.autoplay');
+  });
+
+  // Réactivez le défilement automatique après le défilement manuel
+  owl.on('dragged.owl.carousel', function () {
+    owl.trigger('play.owl.autoplay', [5000]);
+  });
+});
 
 // ...
 
