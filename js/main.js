@@ -277,7 +277,7 @@
 var forceScroll = function() {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     // Remplacez 'YOUR_TARGET_ID' par l'ID de l'élément vers lequel vous souhaitez déplacer la page.
-    var targetElement = $('#home-section');
+    var targetElement = $('#about-section');
     
     if (targetElement.length) {
       $('html, body').animate({
