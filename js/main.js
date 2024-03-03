@@ -63,24 +63,33 @@
 	burgerMenu();
 
 
-	var onePageClick = function() {
+	// ...
 
+var onePageClick = function() {
+  $(document).on('click', '#ftco-nav a[href^="#"]', function (event) {
+    event.preventDefault();
 
-		$(document).on('click', '#ftco-nav a[href^="#"]', function (event) {
-	    event.preventDefault();
+    var href = $.attr(this, 'href');
+    var target = $(href);
 
-	    var href = $.attr(this, 'href');
+    // Vérifiez si la cible est le carrousel
+    if (target.hasClass('home-slider')) {
+      // Désactivez l'effet parallaxe pour le carrousel
+      $('html, body').animate({
+        scrollTop: target.offset().top
+      }, 500);
+    } else {
+      // Appliquez le défilement fluide normalement pour les autres sections
+      $('html, body').animate({
+        scrollTop: target.offset().top - 70
+      }, 500);
+    }
+  });
+};
 
-	    $('html, body').animate({
-	        scrollTop: $($.attr(this, 'href')).offset().top - 70
-	    }, 500, function() {
-	    	// window.location.hash = href;
-	    });
-		});
+onePageClick();
 
-	};
-
-	onePageClick();
+// ...
 	
 	var scrollWindow = function() {
 		$(window).scroll(function(){
