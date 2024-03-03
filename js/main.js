@@ -273,21 +273,21 @@
 
 
 
-// Smooth scroll for mobile
-var smoothScroll = function() {
-	$('a[href*="#"]:not([href="#"])').on('click', function() {
-	  if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-		var target = $(this.hash);
-		target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-		if (target.length) {
-		  $('html, body').animate({
-			scrollTop: target.offset().top - 70
-		  }, 800);
-		  return false;
-		}
-	  }
-	});
-  };
+// Force le défilement de la page sur mobile
+var forceScroll = function() {
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // Remplacez 'YOUR_TARGET_ID' par l'ID de l'élément vers lequel vous souhaitez déplacer la page.
+    var targetElement = $('#home-section');
+    
+    if (targetElement.length) {
+      $('html, body').animate({
+        scrollTop: targetElement.offset().top - 70
+      }, 800);
+    }
+  }
+};
+
+forceScroll();
   
 
 })(jQuery);
